@@ -9,16 +9,14 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class FlightService {
 
-    private static final String API_URL = "http://api.aviationstack.com/v1/flights";
-    private static final String API_KEY = "d4421700d5152c641c7dd163532aae6d"; // 🔑 Replace with your key
+    private static final String OPEN_SKY_URL
+            = "https://opensky-network.org/api/states/all"
+            + "?lamin=26.347&lomin=80.058&lamax=30.447&lomax=88.201"; // Nepal bounding box
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    //  Get all flights (real-time) data
-    public Map getFlights() {
-        String url = API_URL + "?access_key=" + API_KEY;
-
-        ResponseEntity<Map> response = restTemplate.getForEntity(url, Map.class);
+    public Map getNepalFlights() {
+        ResponseEntity<Map> response = restTemplate.getForEntity(OPEN_SKY_URL, Map.class);
         return response.getBody();
     }
 }

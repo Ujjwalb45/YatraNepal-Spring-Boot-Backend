@@ -2,6 +2,7 @@ package com.yatranepal.api.controller;
 
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,16 +13,12 @@ import com.yatranepal.api.service.FlightService;
 @RequestMapping("/api/flight")
 public class FlightController {
 
-    private final FlightService flightService;
+    @Autowired
+    private FlightService flightService;
 
-    public FlightController(FlightService flightService) {
-        this.flightService = flightService;
-    }
-
-    // ✅ Endpoint to get all real-time flights
-    @GetMapping("/all")
-    public Map getAllFlights() {
-        return flightService.getFlights();
+    @GetMapping("/flights/nepal")
+    public Map getNepalFlights() {
+        return flightService.getNepalFlights();
     }
 
 }
