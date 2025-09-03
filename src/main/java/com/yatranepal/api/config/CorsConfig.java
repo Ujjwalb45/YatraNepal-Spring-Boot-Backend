@@ -1,43 +1,37 @@
 package com.yatranepal.api.config;
 
-import org.springframework.beans.factory.annotation.Value;
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.util.Arrays;
-import java.util.List;
-
 @Configuration
 public class CorsConfig {
-
-    @Value("${cors.allowed-origins}")
-    private List<String> allowedOrigins;
-
-    @Value("${cors.allowed-methods}")
-    private String allowedMethods;
-
-    @Value("${cors.allowed-headers}")
-    private String allowedHeaders;
-
-    @Value("${cors.allow-credentials}")
-    private boolean allowCredentials;
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        
-        configuration.setAllowedOriginPatterns(allowedOrigins);
-        configuration.setAllowedMethods(Arrays.asList(allowedMethods.split(",")));
-        configuration.setAllowedHeaders(Arrays.asList(allowedHeaders.split(",")));
-        configuration.setAllowCredentials(allowCredentials);
+
+        // allow your frontend origin (React usually runs on localhost:3000)
+        configuration.setAllowedOriginPatterns(List.of("http://localhost:3000"));
+
+        // allow HTTP methods
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+
+        // allow headers
+        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+
+        // allow credentials (cookies, authorization headers)
+        configuration.setAllowCredentials(true);
+
         configuration.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
-        
+
         return source;
     }
 }

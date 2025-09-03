@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authz -> authz
                 .requestMatchers("/auth/**").permitAll()
-                .requestMatchers("/health", "/api/flights/**").permitAll()
+                .requestMatchers("/health", "/api/flight/**").permitAll()
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
                 .requestMatchers("/hotels/**", "/places/**").permitAll() // Allow public access for now
                 .anyRequest().authenticated()
