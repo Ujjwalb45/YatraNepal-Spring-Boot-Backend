@@ -21,7 +21,7 @@ public class FlightController {
     // ✅ Endpoint to get all real-time flights
     @GetMapping("/all")
     public Map getAllFlights() {
-        return flightService.getAllFlights();
+        return flightService.getFlights();
     }
 
 }

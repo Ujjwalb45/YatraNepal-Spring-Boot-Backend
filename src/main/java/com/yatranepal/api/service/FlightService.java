@@ -14,8 +14,8 @@ public class FlightService {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    // ✅ Get all flights (real-time)
-    public Map getAllFlights() {
+    //  Get all flights (real-time) data
+    public Map getFlights() {
         String url = API_URL + "?access_key=" + API_KEY;
 
         ResponseEntity<Map> response = restTemplate.getForEntity(url, Map.class);
